@@ -1,0 +1,28 @@
+{% extends 'accounts/home.html' %}
+{% block content %}
+
+    {% if catpost %}
+    <h1>All post is given below for {{cat}}</h1>
+    {% for post in catpost %}
+    <hr>
+        <h4>{{post.author}}</h4>
+        <small>on {{post.post_date}}</small>
+        <h2>{{post.title}}</h2>
+        <small><b>{{post.category}}</b></small>
+        {% if post.author == user %}
+        <a href="{% url 'post-update' post.id%}"><button>Update</button></a>
+        <a href="{% url 'post-detail' post.id%}"><button>Delete</button></a>
+        {% endif %}
+        <p>{{post.content}}</p>
+        <a href="{% url 'post-detail' post.id%}"><button>Detail</button></a>
+      
+
+    {% endfor %}
+    {% else %}
+    <h1>Sorry, this page does not exist.</h1>
+    {% endif %}
+    <br><br><br>    
+   
+    
+    
+{% endblock %}

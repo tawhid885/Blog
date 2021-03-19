@@ -1,0 +1,14 @@
+{% extends 'accounts/home.html' %}
+{% block content %}
+<h1>Register</h1>
+<form action="" method='POST'>
+    {% csrf_token %}
+    <input type="text" placeholder="firstname" name='firstname'><br><br>
+    <input type="text" placeholder="lastname" name='lastname'><br><br>
+    <input type="text" placeholder="username" name='username'><br><br>
+    <input type="email" placeholder="email" name='email'><br><br>
+    <input type="password" placeholder="password" name='password1'><br><br>
+    <input type="password" placeholder="confirm password" name='password2'><br><br>
+    <input type="submit">
+</form>
+{% endblock %}

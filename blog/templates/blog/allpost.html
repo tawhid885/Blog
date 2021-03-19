@@ -1,0 +1,26 @@
+{% extends 'accounts/home.html' %}
+{% block content %}
+
+ 
+
+    <h1>All post is given below</h1>
+    {% for post in object_list %}
+    <hr>
+        <h4>{{post.author}}</h4>
+        <small>on {{post.post_date}}</small>
+        <h2>{{post.title}}</h2>
+        <a href="{% url 'catpost' post.category|slugify%}"><small><b>{{post.category}}</b></small></a>
+        {% if post.author == user %}
+        <a href="{% url 'post-update' post.id%}"><button>Update</button></a>
+        <a href="{% url 'post-detail' post.id%}"><button>Delete</button></a>
+        {% endif %}
+        <p>{{post.content}}</p>
+        <a href="{% url 'post-detail' post.id%}"><button>Detail</button></a>
+      
+
+    {% endfor %}
+     
+   
+    
+    
+{% endblock %}

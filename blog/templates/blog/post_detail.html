@@ -1,0 +1,44 @@
+{% extends 'accounts/home.html' %}
+{% block content %}
+ 
+{% if object.author == user%}
+<a href="{% url 'post-update' object.id%}"><h4>Update</h4></a>
+<a href="{% url 'post-delete' object.id%}"><h4>Delete</h4></a>
+
+
+{% endif %}
+<h1>{{ object.author }}</h1>
+<h4>{{ object.author.email }}</h4>
+<h2>{{ object.title }}</h2>
+<p>{{ object.content }}</p>
+<br><br><br><br>
+{% if user.is_authenticated %}
+<form action="{% url 'like_post' post.id %}" method="POST">
+    {% csrf_token %}
+    {% if liked %}
+    <button type="submit" name="post_id" value="{{post.id}}">Unlike</button>-{{total_likes}} Like
+    {% else %}
+    <button type="submit" name="post_id" value="{{post.id}}">Like</button>-{{total_likes}} Like
+    {% endif %}
+
+</form>
+
+<br><br><br>
+{% endif %}
+
+{% if not post.comments.all %}
+No commets yet..........
+<strong><a href="{% url 'createcomment' object.id%}">Comment</a>
+    </strong>
+{% else %}
+<strong><a href="{% url 'createcomment' object.id%}">Add Comment</a>
+    <br><br><br>
+{% for comment in post.comments.all %}
+<strong>{{ comment.name }}</strong>
+<p>{{ comment.body }}</p>
+{% endfor %}
+{% endif %}
+
+<br><br>
+
+{% endblock %}

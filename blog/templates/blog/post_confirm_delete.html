@@ -1,0 +1,14 @@
+{% extends "accounts/home.html" %}
+{% block content %}
+<h1>Are you sure to delete the post {{object.title}}</h1>
+
+<form  method="POST">
+    {% csrf_token %}
+    <button >Delete</button>
+    <a href="{% url 'post-detail' object.id %}">NO, cancel</a>
+
+</form>
+
+<br><br><br>
+
+{% endblock %}

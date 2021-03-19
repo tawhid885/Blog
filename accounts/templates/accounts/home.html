@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>This is main page</h1>
+    <br><br><br>
+    {% for item in cat_menu %}
+    <a href="{% url 'catpost' item|slugify %}">{{item}}</a>
+    {% endfor %}
+    <br><br><br> 
+    <li><a href="#">Home</a></li>
+    <li><a href="{% url 'allpost' %}">Allpost</a></li>
+    
+    {% if user.is_authenticated %}
+    <li><a href="{% url 'profile' %}">Profile</a></li>
+    <li><a href="{% url 'logout' %}">logout</a></li>
+    <li><a href="{% url 'createpost' %}">Createpost</a></li>
+    <li><a href="{% url 'createcat' %}">Create Category</a></li>
+
+    {% elif not user.is_authenticated %}
+    <li><a href="{%url 'login' %}">login</a></li>
+    <li><a href="{% url 'register' %}">Register</a></li>
+    {% endif %}
+
+
+    <!-- all post is appear here -->
+    
+
+    <!-- manager page should be appear here -->
+
+    {% block content %}
+    
+    {% endblock %}
+</body>
+</html>

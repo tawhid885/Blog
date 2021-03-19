@@ -1,0 +1,24 @@
+{% extends 'accounts/home.html' %}
+{% block content %}
+<h1>Profile page</h1>
+<h1>Welcome , {{user.username}}</h1>
+<h4>{{user.email}}</h4>
+<h1>Create your post here <a href="{% url 'createpost' %}">Create Post</a></h1>
+<!-- <h4>Post list</h4> -->
+
+<h1>You can change your profile info here</h1>
+<!-- <form action="" method="POST">
+    <input type="text" placeholder>
+</form> -->
+<a href="{% url 'logout' %}">logout</a>
+
+<img src="{{user.profile.image.url}}" alt="">
+
+<form action="" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{u_form.as_p}}
+    {{p_form.as_p}}
+    <button type='submit'>Update</button>
+</form>
+<br><br><br>
+{% endblock %}
